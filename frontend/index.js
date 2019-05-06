@@ -12,6 +12,7 @@
 //array.push({})
 const numbers =[1, 2, 3] //not actual data//
 const gameBoard = document.getElementById("game-board")
+const table = document.getElementById('table')
 
 //************************************************/
 //              Switching Tiles                  //
@@ -92,7 +93,7 @@ function clickTile(row,column) {
 
 
 ////////////////Create A Keydown Event///////////
-document.addEventListener("keydown", function(e){
+table.addEventListener("keydown", function(e){
   // console.log("click")
   const movingTile = gameBoard.firstElementChild.lastElementChild
   if(event.keyCode == 37) {
@@ -108,6 +109,34 @@ document.addEventListener("keydown", function(e){
   }
   // debugger
 })
+
+let h3 = document.getElementsByTagName('h3')[0],
+
+    seconds = 0, minutes = 0,
+    t;
+  gameBoard.addEventListener('click',e=>{
+      timer();
+   function add() {
+       seconds++;
+       if (seconds >= 60) {
+           seconds = 0;
+           minutes++;
+           if (minutes >= 60) {
+               minutes = 0;
+           }
+       }
+
+       h3.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+       timer();
+   }
+
+   function timer() {
+       t = setTimeout(add, 1000);
+   }
+
+ })
+
 
 ///To Do List
 ///1. grab last tile --done
