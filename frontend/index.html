@@ -9,22 +9,25 @@
   <body>
   <body>
     <div id="game-board" class="container">
-      <div id="table" style="display: table;">
+      <center><div id="table" style="display: table;">
    <div id="row1" style="display: table-row;">
-      <div id="cell11" class="tile1" style="display: table-cell;"></div>
-      <div id="cell12" class="tile2" style="display: table-cell;"></div>
-      <div id="cell13" class="tile3" style="display: table-cell;"></div>
+      <div id="cell11" class="tile1" onkeydown="clickTile(1,1);"></div>
+      <div id="cell12" class="tile2" onkeydown="clickTile(1,2);"></div>
+      <div id="cell13" class="tile3" onkeydown="clickTile(1,3);"></div>
    </div>
    <div id="row2" style="display: table-row;">
-      <div id="cell21" class="tile4" style="display: table-cell;"></div>
-      <div id="cell22" class="tile5" style="display: table-cell;"></div>
-      <div id="cell23" class="tile6" style="display: table-cell;"></div>
+      <div id="cell21" class="tile4" onkeydown="clickTile(2,1);"></div>
+      <div id="cell22" class="tile5" onkeydown="clickTile(2,2);"></div>
+      <div id="cell23" class="tile6" onkeydown="clickTile(2,3);"></div>
    </div>
    <div id="row3" style="display: table-row;">
-      <div id="cell31" class="tile7" style="display: table-cell;"></div>
-      <div id="cell32" class="tile8" style="display: table-cell;"></div>
-      <div id="cell33" class="tile9" style="display: table-cell;"></div>
+      <div id="cell31" class="tile7" onkeydown="clickTile(3,1);"></div>
+      <div id="cell32" class="tile8" onkeydown="clickTile(3,2);"></div>
+      <div id="cell33" class="tile9" onkeydown="clickTile(3,3);"></div>
    </div>
+</div>
+  <button onClick="shuffle();">New Game</button>
+</center>
 </div>
     </div>
     <div id="leader-board">
