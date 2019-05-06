@@ -10,7 +10,7 @@
 //fetch
 // populate array
 //array.push({})
-const numbers =[1, 2, 3] //not actual data//
+// const numbers =[1, 2, 3] //not actual data//
 const gameBoard = document.getElementById("game-board")
 
 //************************************************/
@@ -33,9 +33,9 @@ const gameBoard = document.getElementById("game-board")
 //              Swapping Tiles-Website            //
 //*************************************************//
 function swapTiles(cell1,cell2) {
-  let temp = document.getElementById(cell1).className;
+  let swappy = document.getElementById(cell1).className;
   document.getElementById(cell1).className = document.getElementById(cell2).className;
-  document.getElementById(cell2).className = temp;
+  document.getElementById(cell2).className = swappy;
 }
 
 function shuffle() {
@@ -53,8 +53,10 @@ for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
 
 
 function clickTile(row,column) {
-  var cell = document.getElementById("cell"+row+column);
-  var tile = cell.className;
+  let cell = document.getElementById("cell"+row+column);
+  console.log("this is cell", cell)
+  let tile = cell.className;
+  console.log("this is tile", tile)
   if (tile!="tile9") {
        //Checking if white tile on the right
        if (column<3) {
@@ -105,21 +107,32 @@ document.addEventListener("keydown", function(e){
       let c = parseInt(column) - 1
       // debugger
       clickTile(row, c)
+        console.log('row');
+        console.log('c');
        console.log('Left was pressed');
   } else if(event.keyCode == 39) {
     let c = parseInt(column) + 1
     // debugger
     clickTile(row, c)
+    console.log('row');
+    console.log('c');
         console.log('Right was pressed');
   } else if(event.keyCode == 38) {
-    let r = parseInt(row) - 1
+    const r = parseInt(row) - 1
+    const c = parseInt(column)
     // debugger
-    clickTile(r, column)
+    clickTile(r, c)
+    console.log('r');
+    console.log('column');
         console.log('Up was pressed');
   }else if(event.keyCode == 40) {
-    let r = parseInt(row) + 1
-    // debugg er
-    clickTile(r, column)
+    const r = parseInt(row) + 1
+    const c = parseInt(column)
+    // debugger
+    clickTile(r, c)
+    // debugger
+    console.log('r');
+    console.log('column');
         console.log('Down was pressed');
   }else {
     clickTile(row, column)
