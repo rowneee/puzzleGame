@@ -3,38 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Picture This!</title>
-     <h1 id="title">Picture This!</h1>
+    <center>
+     <h1 id="title" class="looks">Picture This!</h1>
+   </center>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-  <body>
-    <div id="game-board" class="container">
-      <center><div id="table" style="display: table;">
-   <div id="row1" style="display: table-row;">
-      <div id="cell11" class="tile1" onkeydown="clickTile(1,1);"></div>
-      <div id="cell12" class="tile2" onkeydown="clickTile(1,2);"></div>
-      <div id="cell13" class="tile3" onkeydown="clickTile(1,3);"></div>
-   </div>
-   <div id="row2" style="display: table-row;">
-      <div id="cell21" class="tile4" onkeydown="clickTile(2,1);"></div>
-      <div id="cell22" class="tile5" onkeydown="clickTile(2,2);"></div>
-      <div id="cell23" class="tile6" onkeydown="clickTile(2,3);"></div>
-   </div>
-   <div id="row3" style="display: table-row;">
-      <div id="cell31" class="tile7" onkeydown="clickTile(3,1);"></div>
-      <div id="cell32" class="tile8" onkeydown="clickTile(3,2);"></div>
-      <div id="cell33" class="tile9" onkeydown="clickTile(3,3);"></div>
-   </div>
-</div>
-  <button onClick="shuffle();">New Game</button>
-</center>
-</div>
+    <div id="game-board" class="container looks">
+      <center class="looks">
+        <div id="table" style="display: table;">
+         <div id="row1" style="display: table-row;">
+            <div id="cell11" class="tile1" onkeydown="clickTile(1,1);"></div>
+            <div id="cell12" class="tile2" onkeydown="clickTile(1,2);"></div>
+            <div id="cell13" class="tile3" onkeydown="clickTile(1,3);"></div>
+         </div>
+         <div id="row2" style="display: table-row;">
+            <div id="cell21" class="tile4" onkeydown="clickTile(2,1);"></div>
+            <div id="cell22" class="tile5" onkeydown="clickTile(2,2);"></div>
+            <div id="cell23" class="tile6" onkeydown="clickTile(2,3);"></div>
+         </div>
+         <div id="row3" style="display: table-row;">
+            <div id="cell31" class="tile7" onkeydown="clickTile(3,1);"></div>
+            <div id="cell32" class="tile8" onkeydown="clickTile(3,2);"></div>
+            <div id="cell33" class="tile9" onkeydown="clickTile(3,3);"></div>
+         </div>
+        </div>
+        <button class="looks" onClick="shuffle();">New Game</button>
+      </center>
     </div>
-    <div id="leader-board">
+    <div id="leader-board" class="looks">
       <div id="leader-board-title">
         <p>leader board</p>
       </div>
-      <div id="score-board">
+      <div id="score-board" class="looks">
         <p>score board</p>
       </div>
     </div>

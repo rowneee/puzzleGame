@@ -104,21 +104,21 @@ document.addEventListener("keydown", function(e){
   if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 ||e.keyCode == 40)
   // debugger
   if(event.keyCode == 37  ) {
-      let c = parseInt(column) - 1
+      let c = parseInt(column) + 1
       // debugger
       clickTile(row, c)
         console.log('row');
         console.log('c');
        console.log('Left was pressed');
   } else if(event.keyCode == 39) {
-    let c = parseInt(column) + 1
+    let c = parseInt(column) - 1
     // debugger
     clickTile(row, c)
     console.log('row');
     console.log('c');
         console.log('Right was pressed');
   } else if(event.keyCode == 38) {
-    const r = parseInt(row) - 1
+    const r = parseInt(row) + 1
     const c = parseInt(column)
     // debugger
     clickTile(r, c)
@@ -126,7 +126,7 @@ document.addEventListener("keydown", function(e){
     console.log('column');
         console.log('Up was pressed');
   }else if(event.keyCode == 40) {
-    const r = parseInt(row) + 1
+    const r = parseInt(row) - 1
     const c = parseInt(column)
     // debugger
     clickTile(r, c)

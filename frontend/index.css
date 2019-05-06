@@ -58,3 +58,9 @@ background: blue;
 .tile7 {background-position: left bottom;}
 .tile8 {background-position: center bottom;}
 .tile9 {background: white; cursor: default;}
+
+
+.looks{
+  border-style: dashed;
+  border-color: green;
+}
