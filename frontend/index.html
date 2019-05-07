@@ -9,26 +9,28 @@
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
+    <h3><time>00:00</time></h3>
+      <button id="stop">Stop</button><br><br>
     <div id="game-board" class="container looks">
       <center class="looks">
         <div id="table" style="display: table;">
-         <div id="row1" style="display: table-row;">
-            <div id="cell11" class="tile1" onkeydown="clickTile(1,1);"></div>
-            <div id="cell12" class="tile2" onkeydown="clickTile(1,2);"></div>
-            <div id="cell13" class="tile3" onkeydown="clickTile(1,3);"></div>
+         <div id="row1" class="row" style="display: table-row;">
+            <div id="cell11" class="tile1" onkeydown="clickTile(1,1)" onclick="clickTile(1,1);"></div>
+            <div id="cell12" class="tile2" onkeydown="clickTile(1,2)" onclick="clickTile(1,2);"></div>
+            <div id="cell13" class="tile3" onkeydown="clickTile(1,3)" onclick="clickTile(1,3);"></div>
          </div>
-         <div id="row2" style="display: table-row;">
-            <div id="cell21" class="tile4" onkeydown="clickTile(2,1);"></div>
-            <div id="cell22" class="tile5" onkeydown="clickTile(2,2);"></div>
-            <div id="cell23" class="tile6" onkeydown="clickTile(2,3);"></div>
+         <div id="row2" class="row" style="display: table-row;">
+            <div id="cell21" class="tile4" onkeydown="clickTile(2,1)" onclick="clickTile(2,1);"></div>
+            <div id="cell22" class="tile5" onkeydown="clickTile(2,2)" onclick="clickTile(2,2);"></div>
+            <div id="cell23" class="tile6" onkeydown="clickTile(2,3)" onclick="clickTile(2,3);"></div>
          </div>
-         <div id="row3" style="display: table-row;">
-            <div id="cell31" class="tile7" onkeydown="clickTile(3,1);"></div>
-            <div id="cell32" class="tile8" onkeydown="clickTile(3,2);"></div>
-            <div id="cell33" class="tile9" onkeydown="clickTile(3,3);"></div>
+         <div id="row3" class="row" style="display: table-row;">
+            <div id="cell31" class="tile7" onkeydown="clickTile(3,1)" onclick="clickTile(3,1);"></div>
+            <div id="cell32" class="tile8" onkeydown="clickTile(3,2)" onclick="clickTile(3,2);"></div>
+            <div id="cell33" class="tile9" onkeydown="clickTile(3,3)" onclick="clickTile(3,3);"></div>
          </div>
         </div>
-        <button class="looks" onClick="shuffle();">New Game</button>
+        <button class="looks timer" onClick="shuffle();">New Game</button>
       </center>
     </div>
     <div id="leader-board" class="looks">

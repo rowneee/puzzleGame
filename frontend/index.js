@@ -7,27 +7,9 @@
 /************************************************/
 //        All Variables and Data                //
 /************************************************/
-//fetch
-// populate array
-//array.push({})
-// const numbers =[1, 2, 3] //not actual data//
 const gameBoard = document.getElementById("game-board")
-
-//************************************************/
-//              Switching Tiles                  //
-/************************************************/
-
-//////////////Iterate Over All Tiles/////////////
-// function swap() {
-//   numbers.forEach(num => {
-//     tiles = document.querySelector(".tiles")
-//     table = document.create
-//     tiles.innerHTML += `<span data-id="number_id"${num} >${num}</span>`
-//   })
-//   tiles.innerHTML += `<span class="card empty"></span>`
-// }
-// swap();
-// *needs to be made dynamic *
+const timer = document.querySelector('button.timer')
+const table = document.getElementById("table")
 
 //*************************************************//
 //              Swapping Tiles-Website            //
@@ -50,7 +32,6 @@ for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
   }
 }
 }
-
 
 function clickTile(row,column) {
   let cell = document.getElementById("cell"+row+column);
@@ -94,7 +75,10 @@ function clickTile(row,column) {
 
 
 
-////////////////Create A Keydown Event///////////
+/************************************************/
+//                 Keydown Event                //
+/************************************************/
+
 document.addEventListener("keydown", function(e){
   // console.log("click")
   let mover = document.querySelector(".tile9")
@@ -141,11 +125,61 @@ document.addEventListener("keydown", function(e){
   // debugger
 })
 
-///To Do List
-///1. grab last tile --done
-///2. swap tile with adjacent tile
+//************************************************/
+//                     Timer                     //
+/************************************************/
+timer.addEventListener('click',e=>{
+    let h3 = document.getElementsByTagName('h3')[0],
+        seconds = 0, minutes = 0,
+        stop = document.getElementById('stop'),
+        t;
+      timer();
+   function add() {
+       seconds++;
+       if (seconds >= 60) {
+           seconds = 0;
+           minutes++;
+           if (minutes >= 60) {
+               minutes = 0;
+           }
+       }
+       h3.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+       timer();
+   }
+   function timer() {
+       t = setTimeout(add, 1000);
+   }
+   stop.onclick = function() {
+       clearTimeout(t);
+   }
+ })
+
 
 //************************************************/
+//                    End Game                   //
+/************************************************/
+
+function endGame(){
+const allRows = table.children
+const allCols = document.getElementsByClassName("row")
+allRows.each(row => {
+  columns = getColumns inner html
+  columns.each( column => {
+    //here
+  })
+})
+for (row = 0; allRows.length > row; row++){
+  console.log(allRows[row])
+  // console.log( allRows[row]);
+  // for (column = 0; allRows.length > column; column++){
+  //   console.log(allRows[row][column])
+  // }
+}
+debugger
+
+}
+endGame()
+/************************************************/
 //                  ScoreBoard                   //
 /************************************************/
 
