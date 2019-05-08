@@ -1,7 +1,7 @@
 class Api::V1::GamesController < ApplicationController
   def index
     games = Game.all
-    render json: users
+    render json: games
   end
 
   def show
@@ -18,8 +18,8 @@ class Api::V1::GamesController < ApplicationController
     num_rows = gameparams["level"] + 1
     tiles = num_rows ^ 2
       # each with index for tile int
-      # tiles times create new tile tile.game+_id = game id 
-    render json: user
+      # tiles times create new tile tile.game+_id = game id
+    render json: game
   end
 
   def board

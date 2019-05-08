@@ -40,12 +40,12 @@ background: blue;
   justify-content: space-between;
 } */
 
-.tile1, .tile2, .tile3, .tile4, .tile5, .tile6, .tile7, .tile8, .tile9 {
+.tile {
   display: table-cell;
   width: 120px;
   height: 120px;
   border: 1px solid white;
-  background: url(https://www.101computing.net/wp/wp-content/uploads/flower.png);
+  background: url('/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/Evans-Wang.jpg');
   cursor: pointer;
 }
 
@@ -58,3 +58,9 @@ background: blue;
 .tile7 {background-position: left bottom;}
 .tile8 {background-position: center bottom;}
 .tile9 {background: white; cursor: default;}
+
+
+.looks{
+  border-style: dashed;
+  border-color: green;
+}

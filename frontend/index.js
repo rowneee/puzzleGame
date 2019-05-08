@@ -7,28 +7,24 @@
 /************************************************/
 //        All Variables and Data                //
 /************************************************/
-//fetch
-// populate array
-//array.push({})
-// const numbers =[1, 2, 3] //not actual data//
+let level = 1
+let levelImages = {
+  "one": "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/Evans-Wang.jpg",
+  "two": "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/alex-griffith.jpg",
+  "three": "three url"
+}
+
+const levelImage1 = "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/Evans-Wang.jpg"
+const levelImage2 = "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/alex-griffith.jpg"
 const gameBoard = document.getElementById("game-board")
-
-//************************************************/
-//              Switching Tiles                  //
-/************************************************/
-
-//////////////Iterate Over All Tiles/////////////
-// function swap() {
-//   numbers.forEach(num => {
-//     tiles = document.querySelector(".tiles")
-//     table = document.create
-//     tiles.innerHTML += `<span data-id="number_id"${num} >${num}</span>`
-//   })
-//   tiles.innerHTML += `<span class="card empty"></span>`
-// }
-// swap();
-// *needs to be made dynamic *
-
+const timer = document.querySelector('button.timer')
+const table = document.getElementById("table")
+let allTiles = document.getElementsByClassName("tile")
+const tile9 = document.getElementsByClassName("tile tile9")
+let h3 = document.getElementsByTagName('h3')[0]
+let score = h3.innerText
+let newTiles = Array.from(allTiles)
+let t
 //*************************************************//
 //              Swapping Tiles-Website            //
 //*************************************************//
@@ -38,19 +34,29 @@ function swapTiles(cell1,cell2) {
   document.getElementById(cell2).className = swappy;
 }
 
+function newImage(){
+  switch (level){
+    case 2:
+    newTiles.forEach(tile => {
+      tile.style.backgroundImage = `url(${levelImage2})`
+    })
+  break;
+  }
+}
+
 function shuffle() {
-//Use nested loops to access each cell of the 3x3 grid
+// Use nested loops to access each cell of the 3x3 grid
 for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
    for (let column=1;column<=3;column++) { //For each column in this row
-
+//
     let row2=Math.floor(Math.random()*3 + 1); //Pick a random row from 1 to 3
     let column2=Math.floor(Math.random()*3 + 1); //Pick a random column from 1 to 3
-
+//
     swapTiles("cell"+row+column,"cell"+row2+column2); //Swap the look & feel of both cells
   }
 }
+let allTiles = document.getElementsByClassName("tile")
 }
-
 
 function clickTile(row,column) {
   let cell = document.getElementById("cell"+row+column);
@@ -60,41 +66,40 @@ function clickTile(row,column) {
   if (tile!="tile9") {
        //Checking if white tile on the right
        if (column<3) {
-         if ( document.getElementById("cell"+row+(column+1)).className=="tile9") {
+         if ( document.getElementById("cell"+row+(column+1)).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+row+(column+1));
-           return;
          }
        }
        //Checking if white tile on the left
        if (column>1) {
-         if ( document.getElementById("cell"+row+(column-1)).className=="tile9") {
+         if ( document.getElementById("cell"+row+(column-1)).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+row+(column-1));
-           return;
          }
        }
          //Checking if white tile is above
        if (row>1) {
-         if ( document.getElementById("cell"+(row-1)+column).className=="tile9") {
+         if ( document.getElementById("cell"+(row-1)+column).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+(row-1)+column);
-           return;
          }
        }
        //Checking if white tile is below
        if (row<3) {
-         if ( document.getElementById("cell"+(row+1)+column).className=="tile9") {
+         if ( document.getElementById("cell"+(row+1)+column).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+(row+1)+column);
-           return;
          }
        }
   }
-
+levelComplete()
 }
 
 //********************************************************
 
 
 
-////////////////Create A Keydown Event///////////
+/************************************************/
+//                 Keydown Event                //
+/************************************************/
+
 document.addEventListener("keydown", function(e){
   // console.log("click")
   let mover = document.querySelector(".tile9")
@@ -104,21 +109,21 @@ document.addEventListener("keydown", function(e){
   if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 ||e.keyCode == 40)
   // debugger
   if(event.keyCode == 37  ) {
-      let c = parseInt(column) - 1
+      let c = parseInt(column) + 1
       // debugger
       clickTile(row, c)
         console.log('row');
         console.log('c');
        console.log('Left was pressed');
   } else if(event.keyCode == 39) {
-    let c = parseInt(column) + 1
+    let c = parseInt(column) - 1
     // debugger
     clickTile(row, c)
     console.log('row');
     console.log('c');
         console.log('Right was pressed');
   } else if(event.keyCode == 38) {
-    const r = parseInt(row) - 1
+    const r = parseInt(row) + 1
     const c = parseInt(column)
     // debugger
     clickTile(r, c)
@@ -126,7 +131,7 @@ document.addEventListener("keydown", function(e){
     console.log('column');
         console.log('Up was pressed');
   }else if(event.keyCode == 40) {
-    const r = parseInt(row) + 1
+    const r = parseInt(row) - 1
     const c = parseInt(column)
     // debugger
     clickTile(r, c)
@@ -138,16 +143,115 @@ document.addEventListener("keydown", function(e){
     clickTile(row, column)
     console.log("nope!")
   }
-  // debugger
+  levelComplete()
 })
 
-///To Do List
-///1. grab last tile --done
-///2. swap tile with adjacent tile
+//************************************************/
+//                     Timer                     //
+/************************************************/
+timer.addEventListener('click',e=>{
+    let seconds = 0, minutes = 0,
+        stop = document.getElementById('stop')
+
+      timer();
+   function add() {
+       seconds++;
+       if (seconds >= 60) {
+           seconds = 0;
+           minutes++;
+           if (minutes >= 60) {
+               minutes = 0;
+           }
+       }
+       h3.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+   }
+  function timer() {
+       t = setInterval(add, 1000);
+   }
+   stop.onclick = function stopClock() {
+       clearInterval(t);
+   }
+ })
+
 
 //************************************************/
+//               Level Complete                  //
+/************************************************/
+function levelComplete(){
+  let newTiles = Array.from(allTiles)
+  let all = []
+  let n = 0
+  // get tile number from classname //
+  newTiles.forEach(tile => {
+   all.push(tile.className.split('')[9])
+  })
+  //sort array in a new array//
+  let order = all.slice().sort(function(a, b) {
+    return a - b;
+  })
+  //iterate over each element of array and compare if they match//
+  for (i = 0; all.length>i; i++ ){
+    if (all[i] === order[i]){
+      console.log("these match")
+
+    }else {
+      n++
+      console.log("you can do this!")
+    }
+  }
+  //if they match n will not increase from previous loop//
+  if (n !== 0){
+    console.log("please keep trying")
+  } else {
+    gameOver()
+  }
+}
+
+/************************************************/
+//                  Game Over                   //
+/************************************************/
+
+function gameOver(){
+  // get score time //
+  let score = h3.innerText
+  // stop timer function //
+    clearInterval(t)
+    // shuffle()
+    level++
+    newImage()
+  console.log(score)
+  console.log("You won! across screen")
+  console.log("new image/level")
+}
+
+
+//* announce level complete or whatever somewhere on screen
+
+//* render new tile image
+
+
+/************************************************/
+//              Render New Image                //
+/************************************************/
+
+//*
+
+
+/************************************************/
+//                  Save Score                  //
+/************************************************/
+
+//* collect time taken to complete level
+//* create a score from time
+//* add score to current score (default 0)
+
+
+/************************************************/
 //                  ScoreBoard                   //
 /************************************************/
 
 ///To Do List
 ///1. Make Happen
+
+//* find top (5?) scores
+//* render to ScoreBoard
