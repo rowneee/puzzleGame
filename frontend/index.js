@@ -7,10 +7,24 @@
 /************************************************/
 //        All Variables and Data                //
 /************************************************/
+let level = 1
+let levelImages = {
+  "one": "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/Evans-Wang.jpg",
+  "two": "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/alex-griffith.jpg",
+  "three": "three url"
+}
+
+const levelImage1 = "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/Evans-Wang.jpg"
+const levelImage2 = "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/alex-griffith.jpg"
 const gameBoard = document.getElementById("game-board")
 const timer = document.querySelector('button.timer')
 const table = document.getElementById("table")
-
+let allTiles = document.getElementsByClassName("tile")
+const tile9 = document.getElementsByClassName("tile tile9")
+let h3 = document.getElementsByTagName('h3')[0]
+let score = h3.innerText
+let newTiles = Array.from(allTiles)
+let t
 //*************************************************//
 //              Swapping Tiles-Website            //
 //*************************************************//
@@ -20,17 +34,28 @@ function swapTiles(cell1,cell2) {
   document.getElementById(cell2).className = swappy;
 }
 
+function newImage(){
+  switch (level){
+    case 2:
+    newTiles.forEach(tile => {
+      tile.style.backgroundImage = `url(${levelImage2})`
+    })
+  break;
+  }
+}
+
 function shuffle() {
-//Use nested loops to access each cell of the 3x3 grid
+// Use nested loops to access each cell of the 3x3 grid
 for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
    for (let column=1;column<=3;column++) { //For each column in this row
-
+//
     let row2=Math.floor(Math.random()*3 + 1); //Pick a random row from 1 to 3
     let column2=Math.floor(Math.random()*3 + 1); //Pick a random column from 1 to 3
-
+//
     swapTiles("cell"+row+column,"cell"+row2+column2); //Swap the look & feel of both cells
   }
 }
+let allTiles = document.getElementsByClassName("tile")
 }
 
 function clickTile(row,column) {
@@ -41,34 +66,30 @@ function clickTile(row,column) {
   if (tile!="tile9") {
        //Checking if white tile on the right
        if (column<3) {
-         if ( document.getElementById("cell"+row+(column+1)).className=="tile9") {
+         if ( document.getElementById("cell"+row+(column+1)).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+row+(column+1));
-           return;
          }
        }
        //Checking if white tile on the left
        if (column>1) {
-         if ( document.getElementById("cell"+row+(column-1)).className=="tile9") {
+         if ( document.getElementById("cell"+row+(column-1)).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+row+(column-1));
-           return;
          }
        }
          //Checking if white tile is above
        if (row>1) {
-         if ( document.getElementById("cell"+(row-1)+column).className=="tile9") {
+         if ( document.getElementById("cell"+(row-1)+column).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+(row-1)+column);
-           return;
          }
        }
        //Checking if white tile is below
        if (row<3) {
-         if ( document.getElementById("cell"+(row+1)+column).className=="tile9") {
+         if ( document.getElementById("cell"+(row+1)+column).className=="tile tile9") {
            swapTiles("cell"+row+column,"cell"+(row+1)+column);
-           return;
          }
        }
   }
-
+levelComplete()
 }
 
 //********************************************************
@@ -122,17 +143,16 @@ document.addEventListener("keydown", function(e){
     clickTile(row, column)
     console.log("nope!")
   }
-  // debugger
+  levelComplete()
 })
 
 //************************************************/
 //                     Timer                     //
 /************************************************/
 timer.addEventListener('click',e=>{
-    let h3 = document.getElementsByTagName('h3')[0],
-        seconds = 0, minutes = 0,
-        stop = document.getElementById('stop'),
-        t;
+    let seconds = 0, minutes = 0,
+        stop = document.getElementById('stop')
+
       timer();
    function add() {
        seconds++;
@@ -144,44 +164,94 @@ timer.addEventListener('click',e=>{
            }
        }
        h3.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-       timer();
    }
-   function timer() {
-       t = setTimeout(add, 1000);
+  function timer() {
+       t = setInterval(add, 1000);
    }
-   stop.onclick = function() {
-       clearTimeout(t);
+   stop.onclick = function stopClock() {
+       clearInterval(t);
    }
  })
 
 
 //************************************************/
-//                    End Game                   //
+//               Level Complete                  //
+/************************************************/
+function levelComplete(){
+  let newTiles = Array.from(allTiles)
+  let all = []
+  let n = 0
+  // get tile number from classname //
+  newTiles.forEach(tile => {
+   all.push(tile.className.split('')[9])
+  })
+  //sort array in a new array//
+  let order = all.slice().sort(function(a, b) {
+    return a - b;
+  })
+  //iterate over each element of array and compare if they match//
+  for (i = 0; all.length>i; i++ ){
+    if (all[i] === order[i]){
+      console.log("these match")
+
+    }else {
+      n++
+      console.log("you can do this!")
+    }
+  }
+  //if they match n will not increase from previous loop//
+  if (n !== 0){
+    console.log("please keep trying")
+  } else {
+    gameOver()
+  }
+}
+
+/************************************************/
+//                  Game Over                   //
 /************************************************/
 
-function endGame(){
-const allRows = table.children
-const allCols = document.getElementsByClassName("row")
-allRows.each(row => {
-  columns = getColumns inner html
-  columns.each( column => {
-    //here
-  })
-})
-for (row = 0; allRows.length > row; row++){
-  console.log(allRows[row])
-  // console.log( allRows[row]);
-  // for (column = 0; allRows.length > column; column++){
-  //   console.log(allRows[row][column])
-  // }
+function gameOver(){
+  // get score time //
+  let score = h3.innerText
+  // stop timer function //
+    clearInterval(t)
+    // shuffle()
+    level++
+    newImage()
+  console.log(score)
+  console.log("You won! across screen")
+  console.log("new image/level")
 }
-debugger
 
-}
-endGame()
+
+//* announce level complete or whatever somewhere on screen
+
+//* render new tile image
+
+
+/************************************************/
+//              Render New Image                //
+/************************************************/
+
+//*
+
+
+/************************************************/
+//                  Save Score                  //
+/************************************************/
+
+//* collect time taken to complete level
+//* create a score from time
+//* add score to current score (default 0)
+
+
 /************************************************/
 //                  ScoreBoard                   //
 /************************************************/
 
 ///To Do List
 ///1. Make Happen
+
+//* find top (5?) scores
+//* render to ScoreBoard
