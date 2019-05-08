@@ -40,12 +40,12 @@ background: blue;
   justify-content: space-between;
 } */
 
-.tile1, .tile2, .tile3, .tile4, .tile5, .tile6, .tile7, .tile8, .tile9 {
+.tile {
   display: table-cell;
   width: 120px;
   height: 120px;
   border: 1px solid white;
-  background: url(https://www.101computing.net/wp/wp-content/uploads/flower.png);
+  background: url("/Users/elizabethzevin/Development/code/FInal Projects/puzzleGame/backend/app/pics/evans.jpg");
   cursor: pointer;
 }
 
@@ -57,8 +57,12 @@ background: blue;
 .tile6 {background-position: right center;}
 .tile7 {background-position: left bottom;}
 .tile8 {background-position: center bottom;}
-.tile9 {background: white; cursor: default;}
-
+.tile9 {background: white;
+        cursor: default;
+        width: 120px;
+        height: 120px;
+        background: white;
+      }
 
 .looks{
   border-style: dashed;

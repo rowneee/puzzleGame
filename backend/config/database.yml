@@ -86,5 +86,5 @@ production:
 
 development:
     adapter: postgresql
-    database: [YOUR_DATABASE_NAME]
+    database: puzzleGame_development
     host: localhost

@@ -8,29 +8,39 @@
    </center>
     <link rel="stylesheet" href="index.css">
   </head>
+
   <body>
-    <h3><time>00:00</time></h3>
-      <button id="stop">Stop</button><br><br>
+    <h3><time >00:00</time></h3>
+    <button id="stop">Stop</button><br><br>
+    <form class="createUser">
+      <h3>Create Your Account!</h3>
+      <input type="text" name="name" value="" placeholder="Enter your name" class="input-text" >
+      <br>
+      <input type="submit" name="submit" value="Create New Account" class="submit">
+    </form>
+    <div id="showName">
+      </div>
+      <br>
     <div id="game-board" class="container looks">
       <center class="looks">
         <div id="table" style="display: table;">
          <div id="row1" class="row" style="display: table-row;">
-            <div id="cell11" class="tile1" onkeydown="clickTile(1,1)" onclick="clickTile(1,1);"></div>
-            <div id="cell12" class="tile2" onkeydown="clickTile(1,2)" onclick="clickTile(1,2);"></div>
-            <div id="cell13" class="tile3" onkeydown="clickTile(1,3)" onclick="clickTile(1,3);"></div>
+            <div id="cell11" class="tile tile1" onkeydown="clickTile(1,1)" onclick="clickTile(1,1);"></div>
+            <div id="cell12" class="tile tile2" onkeydown="clickTile(1,2)" onclick="clickTile(1,2);"></div>
+            <div id="cell13" class="tile tile3" onkeydown="clickTile(1,3)" onclick="clickTile(1,3);"></div>
          </div>
          <div id="row2" class="row" style="display: table-row;">
-            <div id="cell21" class="tile4" onkeydown="clickTile(2,1)" onclick="clickTile(2,1);"></div>
-            <div id="cell22" class="tile5" onkeydown="clickTile(2,2)" onclick="clickTile(2,2);"></div>
-            <div id="cell23" class="tile6" onkeydown="clickTile(2,3)" onclick="clickTile(2,3);"></div>
+            <div id="cell21" class="tile tile4" onkeydown="clickTile(2,1)" onclick="clickTile(2,1);"></div>
+            <div id="cell22" class="tile tile5" onkeydown="clickTile(2,2)" onclick="clickTile(2,2);"></div>
+            <div id="cell23" class="tile tile6" onkeydown="clickTile(2,3)" onclick="clickTile(2,3);"></div>
          </div>
          <div id="row3" class="row" style="display: table-row;">
-            <div id="cell31" class="tile7" onkeydown="clickTile(3,1)" onclick="clickTile(3,1);"></div>
-            <div id="cell32" class="tile8" onkeydown="clickTile(3,2)" onclick="clickTile(3,2);"></div>
-            <div id="cell33" class="tile9" onkeydown="clickTile(3,3)" onclick="clickTile(3,3);"></div>
+            <div id="cell31" class="tile tile7" onkeydown="clickTile(3,1)" onclick="clickTile(3,1);"></div>
+            <div id="cell32" class="tile tile8" onkeydown="clickTile(3,2)" onclick="clickTile(3,2);"></div>
+            <div id="cell33" class="tile tile9" onkeydown="clickTile(3,3)" onclick="clickTile(3,3);"></div>
          </div>
         </div>
-        <button class="looks timer" onClick="shuffle();">New Game</button>
+        <button class="looks timer" onClick="shuffle();">Shuffle</button>
       </center>
     </div>
     <div id="leader-board" class="looks">

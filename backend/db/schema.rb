@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_143628) do
   create_table "games", force: :cascade do |t|
     t.integer "score"
     t.integer "user_id"
-    t.integer "level", 
+    t.integer "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "level_completed", default: false
