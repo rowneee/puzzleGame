@@ -5,6 +5,13 @@
 // ArrowDown = 40
 
 /************************************************/
+//            All Links and URLs                //
+/************************************************/
+//
+const BASE_URL = 'http://localhost:3000/api/v1'
+const USER_URL = `${BASE_URL}/users`
+
+/************************************************/
 //        All Variables and Data                //
 /************************************************/
 let level = 1
@@ -24,6 +31,10 @@ const tile9 = document.getElementsByClassName("tile tile9")
 let h3 = document.getElementsByTagName('h3')[0]
 let score = h3.innerText
 let newTiles = Array.from(allTiles)
+const form = document.querySelector('.createUser')
+const inputName = document.getElementsByClassName('input-text')[0]
+const showName = document.getElementById('showName')
+const scoreBoard = document.getElementById('score-board')
 let t
 //*************************************************//
 //              Swapping Tiles-Website            //
@@ -44,19 +55,19 @@ function newImage(){
   }
 }
 
-function shuffle() {
-// Use nested loops to access each cell of the 3x3 grid
-for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
-   for (let column=1;column<=3;column++) { //For each column in this row
-//
-    let row2=Math.floor(Math.random()*3 + 1); //Pick a random row from 1 to 3
-    let column2=Math.floor(Math.random()*3 + 1); //Pick a random column from 1 to 3
-//
-    swapTiles("cell"+row+column,"cell"+row2+column2); //Swap the look & feel of both cells
-  }
-}
-let allTiles = document.getElementsByClassName("tile")
-}
+// function shuffle() {
+// // Use nested loops to access each cell of the 3x3 grid
+// for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
+//    for (let column=1;column<=3;column++) { //For each column in this row
+// //
+//     let row2=Math.floor(Math.random()*3 + 1); //Pick a random row from 1 to 3
+//     let column2=Math.floor(Math.random()*3 + 1); //Pick a random column from 1 to 3
+// //
+//     swapTiles("cell"+row+column,"cell"+row2+column2); //Swap the look & feel of both cells
+//   }
+// }
+// let allTiles = document.getElementsByClassName("tile")
+// }
 
 function clickTile(row,column) {
   let cell = document.getElementById("cell"+row+column);
@@ -245,13 +256,49 @@ function gameOver(){
 //* create a score from time
 //* add score to current score (default 0)
 
-
+/************************************************/
+//                Show User                     //
+/************************************************/
+form.addEventListener('submit', e =>{
+  e.preventDefault();
+  let name = inputName.value
+  console.log("name is", name)
+  fetch(USER_URL, {
+    method:'POST',
+    headers: {
+         "Content-type": "application/json",
+         "Accept": "application/json"
+       },
+    body: JSON.stringify({
+      name: name
+    })
+  })
+  .then(
+    res => {
+    if(res.status == 201) {
+      // console.log("name string is", name)
+      // console.log(renderName(name))
+      form.style.display = "none"
+      renderName(name)
+    } else {
+      renderName("sorry something went wrong")
+    }
+  })
+  form.reset()
 /************************************************/
 //                  ScoreBoard                   //
 /************************************************/
 
-///To Do List
-///1. Make Happen
+fetch(USER_URL)
+ .then(res => res.json())
+ .then(users =>{
+   newUser = users[users.length-1]
+   // getScore()
+   scoreBoard.innerHTML += `<h4>${name} ${0}</h4>`
+ })
 
-//* find top (5?) scores
-//* render to ScoreBoard
+})
+const renderName = (user) => {
+ // console.log(user)
+ showName.innerHTML += `<p> Welcome, ${user}! </p>`
+}
