@@ -49,6 +49,10 @@ let t
 form.addEventListener('submit', e => {
   e.preventDefault();
   let name = inputName.value
+  let score = h3.innerText.split("")
+  let parsedScore = score[0] + score[1] + score[3] + score[4]
+  console.log(score);
+  console.log(parsedScore);
   console.log("name is", name)
   fetch(userURL, {
     method:'POST',
@@ -57,7 +61,8 @@ form.addEventListener('submit', e => {
          "Accept": "application/json"
        },
     body: JSON.stringify({
-      name: name
+      name: name,
+      score: parsedScore
     })
   })
   .then(res => res.json())
@@ -326,7 +331,7 @@ function gameOver(){
      .then(users => {
        // let newUser = users[users.length-1]
        // getScore()
-       scoreBoard.innerHTML += `<h4>${name}: ${parsedScore}</h4>`
+       // scoreBoard.innerHTML += `<h4>${name}: ${parsedScore}</h4>`
      })
    }
 
@@ -340,6 +345,7 @@ function fetchHighScores() {
     .then(function (myJson) {
       users = myJson
       users.sort(compare)
+      console.log(users)
       renderHighScores()
     })
 }
@@ -347,7 +353,7 @@ function fetchHighScores() {
 function compare(a, b) {
   const scoreA = a.score;
   const scoreB = b.score
-
+// debugger
   let comparison = 0;
   if (scoreA > scoreB) {
     comparison = 1;
@@ -358,9 +364,9 @@ function compare(a, b) {
 }
 
 function renderHighScores() {
-  topTen = users.slice(0, 10)
+  // topTen = users.slice(0, 10)
   leaderDiv.innerHTML = ""
-  topTen.forEach((u, i) => {
+  users.forEach((u, i) => {
     leaderDiv.innerHTML += `
       <tr class="score-card" id="rank${i+1}">
         <td class="column">${i+1}. </td>
