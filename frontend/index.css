@@ -57,10 +57,47 @@ background: blue;
 .tile6 {background-position: right center;}
 .tile7 {background-position: left bottom;}
 .tile8 {background-position: center bottom;}
-.tile9 {background: white; cursor: default;}
+.tile9 {background: white !important; cursor: default;}
 
 
 .looks{
   border-style: dashed;
   border-color: green;
+}
+
+#game-board {
+  display: table;
+}
+
+.create-user {
+  display: table;
+  margin: 0 auto;
+}
+
+#show-name {
+  display: table;
+  margin: 0 auto;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+#score-container {
+  margin-left: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.score-card:nth-child(even) {
+  background: #f4f4f4;
+}
+
+table {
+  border-collapse:collapse;
+}
+
+td {
+  padding: 10px 20px;
 }

@@ -6,6 +6,7 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     user = User.find(params[:id])
+    render json: user
   end
 
   def new
@@ -14,6 +15,7 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.create(userparams)
+    render json: user
   end
 
   # def update
