@@ -1,7 +1,11 @@
 *{
-  padding: 0;
+  /* padding: 20px; */
   margin: 0;
   box-sizing: border-box;
+  background-color: #A9BCD0 !important;
+  color: #1B2845;
+  font-family: 'Gugi', cursive !important;
+
 }
 
 .card{
@@ -44,7 +48,7 @@ background: blue;
   display: table-cell;
   width: 120px;
   height: 120px;
-  border: 1px solid white;
+  border: 1px solid #1B2845;
   background: url('/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/Evans-Wang.jpg');
   cursor: pointer;
 }
@@ -57,16 +61,18 @@ background: blue;
 .tile6 {background-position: right center;}
 .tile7 {background-position: left bottom;}
 .tile8 {background-position: center bottom;}
-.tile9 {background: white !important; cursor: default;}
+.tile9 {background: #58A4B0 !important; cursor: default;}
 
 
-.looks{
+/* .looks{
   border-style: dashed;
   border-color: green;
-}
+} */
 
 #game-board {
   display: table;
+  margin: 0 auto;
+  margin-left: 30px;
 }
 
 .create-user {
@@ -77,11 +83,13 @@ background: blue;
 #show-name {
   display: table;
   margin: 0 auto;
+  font-size: 90px;
 }
 
 .game-wrapper {
   display: flex;
   flex-direction: row;
+  margin-left: 33%;
 }
 
 #score-container {
@@ -91,13 +99,30 @@ background: blue;
 }
 
 .score-card:nth-child(even) {
-  background: #f4f4f4;
+  background: #1B2845;
 }
 
 table {
   border-collapse:collapse;
+  margin-left: 90px;
 }
 
 td {
   padding: 10px 20px;
+}
+
+.table {
+  background: white;
+  text-decoration-color: white
+}
+
+.header {
+  font-size: xx-large;
+  font-weight: bolder;
+  font-style: oblique;
+
+}
+
+.leaderboard {
+  margin-left: 152px;
 }

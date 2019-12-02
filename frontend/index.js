@@ -25,7 +25,7 @@ const levelImage1 = "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/
 const levelImage2 = "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/alex-griffith.jpg"
 const levelImage3 = "/Users/ronishabo/Flatiron/Mod_3/Project/puzzleGame/backend/app/pictures/cookie-monster.jpg"
 const gameBoard = document.getElementById("game-board")
-const timer = document.querySelector('button.timer')
+const shuffleButton = document.querySelector('.shuffle-button')
 const table = document.getElementById("table")
 let allTiles = document.getElementsByClassName("tile")
 const tile9 = document.getElementsByClassName("tile tile9")
@@ -40,6 +40,9 @@ let leaderDiv = document.getElementById('leaders')
 let users = []
 let topTen = []
 let t
+let timerStarted = false
+let seconds = 0, minutes = 0,
+    stop = document.getElementById('stop')
 
 
 /************************************************/
@@ -49,10 +52,7 @@ let t
 form.addEventListener('submit', e => {
   e.preventDefault();
   let name = inputName.value
-  let score = h3.innerText.split("")
-  let parsedScore = score[0] + score[1] + score[3] + score[4]
-  console.log(score);
-  console.log(parsedScore);
+
   console.log("name is", name)
   fetch(userURL, {
     method:'POST',
@@ -61,8 +61,7 @@ form.addEventListener('submit', e => {
          "Accept": "application/json"
        },
     body: JSON.stringify({
-      name: name,
-      score: parsedScore
+      name: name
     })
   })
   .then(res => res.json())
@@ -73,7 +72,7 @@ form.addEventListener('submit', e => {
       // console.log("name string is", name)
       // console.log(renderName(name))
       form.style.display = "none"
-      showName.innerHTML = `<p class="welcome-user" data-id=${user.id}> Welcome, ${user.name}! </p>`
+      showName.innerHTML = `<p id=${user.id} class="welcome-user"> Welcome, ${user.name}! </p>`
       // console.log();
       // renderName(name)
   })
@@ -110,18 +109,18 @@ function newImage(){
 }
 
 function shuffle() {
-// // Use nested loops to access each cell of the 3x3 grid
-// for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
-//    for (let column=1;column<=3;column++) { //For each column in this row
-// //
-//     let row2=Math.floor(Math.random()*3 + 1); //Pick a random row from 1 to 3
-//     let column2=Math.floor(Math.random()*3 + 1); //Pick a random column from 1 to 3
-// //
-//     swapTiles("cell"+row+column,"cell"+row2+column2); //Swap the look & feel of both cells
-//   }
-// }
-// let allTiles = document.getElementsByClassName("tile")
-timer()
+// Use nested loops to access each cell of the 3x3 grid
+  for (let row=1;row<=3;row++) { //For each row of the 3x3 grid
+     for (let column=1;column<=3;column++) { //For each column in this row
+  //
+      let row2=Math.floor(Math.random()*3 + 1); //Pick a random row from 1 to 3
+      let column2=Math.floor(Math.random()*3 + 1); //Pick a random column from 1 to 3
+  //
+      swapTiles("cell"+row+column,"cell"+row2+column2); //Swap the look & feel of both cells
+    }
+  }
+  let allTiles = document.getElementsByClassName("tile")
+  timer()
 }
 
 function clickTile(row,column) {
@@ -174,39 +173,39 @@ levelComplete()
     if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 ||e.keyCode == 40)
     // debugger
     if(event.keyCode == 37  ) {
-        let c = parseInt(column) + 1
+      let c = parseInt(column) + 1
         // debugger
-        clickTile(row, c)
-          console.log('row');
-          console.log('c');
-         console.log('Left was pressed');
-    } else if(event.keyCode == 39) {
-      let c = parseInt(column) - 1
-      // debugger
       clickTile(row, c)
       console.log('row');
       console.log('c');
-          console.log('Right was pressed');
+      console.log('Left was pressed');
+    } else if(event.keyCode == 39) {
+        let c = parseInt(column) - 1
+        // debugger
+        clickTile(row, c)
+        console.log('row');
+        console.log('c');
+        console.log('Right was pressed');
     } else if(event.keyCode == 38) {
-      const r = parseInt(row) + 1
-      const c = parseInt(column)
-      // debugger
-      clickTile(r, c)
-      console.log('r');
-      console.log('column');
-          console.log('Up was pressed');
-    }else if(event.keyCode == 40) {
-      const r = parseInt(row) - 1
-      const c = parseInt(column)
-      // debugger
-      clickTile(r, c)
-      // debugger
-      console.log('r');
-      console.log('column');
-          console.log('Down was pressed');
-    }else {
-      clickTile(row, column)
-      console.log("nope!")
+        const r = parseInt(row) + 1
+        const c = parseInt(column)
+        // debugger
+        clickTile(r, c)
+        console.log('r');
+        console.log('column');
+        console.log('Up was pressed');
+    } else if(event.keyCode == 40) {
+        const r = parseInt(row) - 1
+        const c = parseInt(column)
+        // debugger
+        clickTile(r, c)
+        // debugger
+        console.log('r');
+        console.log('column');
+        console.log('Down was pressed');
+    } else {
+        clickTile(row, column)
+        console.log("nope!")
     }
     levelComplete()
   })
@@ -214,28 +213,32 @@ levelComplete()
 //************************************************/
 //                     Timer                     //
 /************************************************/
-timer.addEventListener('click',e=>{
-    let seconds = 0, minutes = 0,
-        stop = document.getElementById('stop')
+shuffleButton.addEventListener('click',e=>{
+    if (timerStarted == false) {
+      timerStarted = true
+      seconds = 0
+      minutes = 0,
 
-      timer();
-   function add() {
-       seconds++;
-       if (seconds >= 60) {
-           seconds = 0;
-           minutes++;
-           if (minutes >= 60) {
-               minutes = 0;
-           }
-       }
-       h3.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-   }
-  function timer() {
-       t = setInterval(add, 1000);
-   }
-   stop.onclick = function stopClock() {
-       clearInterval(t);
-   }
+        timer();
+
+     // stop.onclick = function stopClock() {
+     //     clearInterval(t);
+     // }
+    }
+    function add() {
+        seconds++;
+        if (seconds >= 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes >= 60) {
+                minutes = 0;
+            }
+        }
+        h3.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    }
+   function timer() {
+        t = setInterval(add, 1000);
+    }
  })
 
 
@@ -258,18 +261,17 @@ function levelComplete(){
   for (i = 0; all.length>i; i++ ){
     if (all[i] === order[i]){
       console.log("these match")
-
-    }else {
+    } else {
       n++
       console.log("you can do this!")
     }
   }
   //if they match n will not increase from previous loop//
-  if (n !== 0){
-    console.log("please keep trying")
-  } else {
-    gameOver()
-  }
+    if (n !== 0){
+      console.log("please keep trying")
+    } else {
+      gameOver()
+    }
 }
 
 /************************************************/
@@ -277,14 +279,14 @@ function levelComplete(){
 /************************************************/
 
 function gameOver(){
-  // get score time //
-  let score = h3.innerText
   // stop timer function //
-    clearInterval(t)
-    level++
-    newImage()
-    shuffle()
-    saveScore()
+  saveScore()
+  // clearInterval(t)
+  // timerStarted = false
+  level++
+  console.log(level);
+  newImage()
+  shuffle()
   console.log("You won! across screen")
   console.log("new image/level")
 }
@@ -309,14 +311,12 @@ function gameOver(){
   //* create a score from time
   //* add score to current score (default 0)
 
-  function saveScore() {
-    const welcomeUser = document.getElementsByClassName('welcome-user')
-    const userId = welcomeUser.dataset.id
-    console.log(userId)
-    let score = h3.innerText.split("")
-    let parsedScore = parseInt(score[0] + score[1] + score[3] + score[4])
-    console.log(score);
-    console.log(parsedScore);
+   function saveScore() {
+    let timed = h3.innerText.split("")
+    let score = timed[0] + timed[1] + timed[3] + timed[4]
+    let gameScore = document.getElementById("game-score")
+    let userId = document.getElementsByClassName('welcome-user')[0].id
+    console.log("score is:", score);
     fetch(userURL + `/${userId}`, {
       method: "PATCH",
       headers: {
@@ -324,15 +324,11 @@ function gameOver(){
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        score: parsedScore
+        score: score
       })
     })
      .then(res => res.json())
-     .then(users => {
-       // let newUser = users[users.length-1]
-       // getScore()
-       // scoreBoard.innerHTML += `<h4>${name}: ${parsedScore}</h4>`
-     })
+     .then(fetchHighScores)
    }
 
 /************************************************/
@@ -364,14 +360,14 @@ function compare(a, b) {
 }
 
 function renderHighScores() {
-  // topTen = users.slice(0, 10)
+  topTen = users.slice(0, 10)
   leaderDiv.innerHTML = ""
-  users.forEach((u, i) => {
+  topTen.forEach((u, i) => {
     leaderDiv.innerHTML += `
-      <tr class="score-card" id="rank${i+1}">
-        <td class="column">${i+1}. </td>
-        <td class="six wide column">${u.name}</td>
-        <td class="column">${u.score}</td>
+      <tr class="score-card looks table" id="rank${i+1}">
+        <td class="column table">${i+1}. </td>
+        <td class="six wide column table">${u.name}</td>
+        <td class="column table">${u.score}</td>
       </tr>`
   })
 }

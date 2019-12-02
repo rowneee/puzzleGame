@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Picture This!</title>
   <center>
-   <h1 id="title" class="looks">Picture This!</h1>
+   <h1 id="title" class="looks header">Picture This!</h1>
   </center>
   <link rel="stylesheet" href="index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
  </head>
  <body>
-  <h3><time >00:00</time></h3>
-  <button id="stop">Stop</button><br><br>
+  <center>
+    <h3><time >00:00</time></h3>
+  </center>
+  <!-- <button id="stop">Stop</button><br><br> -->
   <form class="create-user">
    <h3>Create Your Account!</h3>
    <input type="text" name="name" value="" placeholder="Enter your name" class="input-text" >
@@ -43,10 +45,11 @@
          <div id="cell33" class="tile tile9" onkeydown="clickTile(3,3)" onclick="clickTile(3,3);"></div>
         </div>
        </div>
-       <button class="looks timer" onClick="shuffle();">Shuffle</button>
+       <button class="shuffle-button" onClick="shuffle();">Shuffle</button>
       </center>
      </div>
      <div id="score-container" class="">
+       <h3 class="leaderboard">LEADERBOARD</h3>
        <table>
          <thead>
            <tr>

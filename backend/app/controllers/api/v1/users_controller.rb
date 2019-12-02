@@ -18,11 +18,19 @@ class Api::V1::UsersController < ApplicationController
     render json: user
   end
 
+  def score
+    score = User.find(params[:score])
+    render json: user
+  end
+
   # def update
   # end
   #
-  # def edit
-  # end
+  def update
+     user = User.find(params[:id])
+     user.update(score: params[:score])
+     render json: user
+   end
 
   # def delete
   # end
